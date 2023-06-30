@@ -11,6 +11,10 @@ Node* sortList(Node* head);
 Node* mergeLists(Node* head1, Node* head2);
 
 main(){
+	
+	int op;
+	int confere = 0;
+	
 	Node* head1 = new Node();
 	Node* second1 = new Node ();
 	Node* third1 = new Node();
@@ -51,22 +55,51 @@ main(){
 	std::cout << "Lista 2: ";
 	printList(head2);
 	
-	std::cout << "Lista 1 ordenada? " << (isListOrdered(head1) ? "Sim" : "Não") << std::endl;
-	std::cout << "Lista 2 ordenada? " << (isListOrdered(head2) ? "Sim" : "Não") << std::endl;
+	std::cout << "Escolha uma das opções abaixo: " <<
+	 "\n\n1 - Verificar se a lista 1 está ordenada" << 
+	 "\n2 - Verificar se a lista 2 está ordenada" <<
+	 "\n3 - Ordenar Listas" << 
+	 "\n4 - Mesclar elementos da segunda lista na primeira" << std::endl;
+	 
+	 while (confere -= 0){
+	 switch (op){
+	 	
+	 	case 1: {
+	 		isListOrdered(head1);
+			break;
+		 }
+		 case 2: {
+		 	isListOrdered(head2);
+			break;
+		 }
+		 case 3: {
+		 	head1 = sortList(head1);
+		 	head2 = sortList(head2);
+			break;
+		 }
+		 case 4:{
+		 	Node* mergedHead = mergeLists(head1, head2);
+		 	printList(mergedHead);
+			break;
+		 }
+	 }
+	}
 	
-	head1 = sortList(head1);
-	head2 = sortList(head2);
-	
-	std::cout << "Lista 1 Ordenada: ";
-	printList(head1);
-	
-	std::cout << "Lista 2 ordenada: ";
-	printList(head2);
-	
-	Node* mergedHead = mergeLists(head1, head2);
-	std::cout <<"Lista mesclada: ";
-	printList(mergedHead);
-	
+//	std::cout << "Lista 1 ordenada? " << (isListOrdered(head1) ? "Sim" : "Não") << std::endl;
+//	std::cout << "Lista 2 ordenada? " << (isListOrdered(head2) ? "Sim" : "Não") << std::endl;
+//	
+//	head1 = sortList(head1);
+//	head2 = sortList(head2);
+//	
+//	std::cout << "Lista 1 Ordenada: ";
+//	printList(head1);
+//	
+//	std::cout << "Lista 2 ordenada: ";
+//	printList(head2);
+//	
+//	Node* mergedHead = mergeLists(head1, head2);
+//	std::cout <<"Lista mesclada: ";
+//	
 	return 0;
 }
 
@@ -84,6 +117,7 @@ bool isListOrdered (Node* head){
 
 Node* sortList(Node* head){
 	if (head == NULL || head->next == NULL){
+		std::cout << "A lista já está ordenada" << std::endl;
 		return head;
 	}
 	
@@ -113,11 +147,13 @@ Node* sortList(Node* head){
 				else{
 					previous = current;
 					current = current->next;
+					
 				}
 				
 			}
 		}
 	}
+	std::cout << "A lista foi ordenada" << std::endl;
 	return head;
 }
 
@@ -132,10 +168,12 @@ void printList(Node* head){
 
 Node* mergeLists(Node* head1, Node* head2){
     if (head1 == NULL) {
-        return head2;
+        std::cout << "As listas já foram misturadas" << std::endl;
+		return head2;
     }
     if (head2 == NULL) {
-        return head1;
+        std::cout << "As listas já foram misturadas" << std::endl;
+		return head1;
     }
 
     Node* mergedNode = NULL;
@@ -146,7 +184,7 @@ Node* mergeLists(Node* head1, Node* head2){
         mergedNode = head2;
         mergedNode->next = mergeLists(head1, head2->next);
     }
-
+	std::cout << "As listas foram misturadas" << std::endl;
     return mergedNode;
 }
 
